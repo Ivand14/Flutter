@@ -16,14 +16,23 @@ class _CounterFunctionState extends State<CounterFunction> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Center(child: Text('Counter Screen')),
-        ),
+            title: const Center(child: Text('Counter Function')),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    initialCounter = 0;
+                  });
+                },
+                icon: const Icon(Icons.restart_alt_sharp),
+              )
+            ]),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '$initialCounter',
+                initialCounter < 0 ? '0' : '$initialCounter',
                 style:
                     const TextStyle(fontSize: 90, fontWeight: FontWeight.w200),
               ),
@@ -34,13 +43,29 @@ class _CounterFunctionState extends State<CounterFunction> {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              initialCounter += 1;
-            });
-          },
-          child: const Icon(Icons.plus_one),
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              onPressed: () {
+                setState(() {
+                  initialCounter += 1;
+                });
+              },
+              child: const Icon(Icons.plus_one),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            FloatingActionButton(
+              onPressed: () {
+                setState(() {
+                  initialCounter -= 1;
+                });
+              },
+              child: const Icon(Icons.exposure_minus_1),
+            ),
+          ],
         ),
       ),
     );
