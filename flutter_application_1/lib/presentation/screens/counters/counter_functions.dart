@@ -46,28 +46,43 @@ class _CounterFunctionState extends State<CounterFunction> {
         floatingActionButton: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            FloatingActionButton(
+            CustomButton(
               onPressed: () {
                 setState(() {
                   initialCounter += 1;
                 });
               },
-              child: const Icon(Icons.plus_one),
+              icon: Icons.plus_one,
             ),
             const SizedBox(
               height: 20,
             ),
-            FloatingActionButton(
+            CustomButton(
               onPressed: () {
                 setState(() {
-                  initialCounter -= 1;
+                  initialCounter < 0 ? '0' : initialCounter -= 1;
                 });
               },
-              child: const Icon(Icons.exposure_minus_1),
+              icon: Icons.exposure_minus_1_outlined,
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback? onPressed;
+
+  const CustomButton({super.key, required this.icon, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: onPressed,
+      child: Icon(icon),
     );
   }
 }
